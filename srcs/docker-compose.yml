@@ -1,0 +1,20 @@
+services:
+    mariadb:
+        build: ./requirements/mariadb
+        container_name: mariadb
+        restart: always
+        env_file:
+            - .env
+        volumes:
+            - db_vol:/var/lib/mysql
+        ports:
+            - "3306:3306"
+        networks:
+            - inception_network
+
+volumes:
+    db_vol:
+    wp_files_vol:
+
+networks:
+    inception_network:
