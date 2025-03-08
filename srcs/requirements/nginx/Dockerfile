@@ -1,6 +1,5 @@
 FROM alpine:3.20
 
-# Install dependencies
 RUN apk update && apk add --no-cache \
     nginx \
     openssl \
@@ -11,18 +10,14 @@ RUN apk update && apk add --no-cache \
     g++ \
     make
 
-# Enable TLSv1.3 in NGINX configuration
-#RUN sed -i '/^http {/a ssl_protocols TLSv1.2 TLSv1.3;' /etc/nginx/nginx.conf
+# Generate a self-signed certificate
+RUN openssl req -x509 -newkey rsa:4096 \
+			-keyout /etc/ssl/private/server.key \
+			-out /etc/ssl/certs/server.crt -days 365 -nodes \
+			-subj "/C=FI/ST=Uusima/L=Helsinki/O=Hive Helsinki/OU=/CN=hoatran.42.fr"
 
-# Expose the port for NGINX
+COPY conf/default.conf /etc/nginx/http.d/default.conf
+
 EXPOSE 443
 
-# Add the default configuration and a self-signed certificate
-COPY conf/default.conf /etc/nginx/http.d/default.conf
-# COPY ssl/server.crt /etc/ssl/certs/server.crt
-# COPY ssl/server.key /etc/ssl/private/server.key
-
-# Run NGINX in the foreground
 CMD ["nginx", "-g", "daemon off;"]
-# CMD ["tail", "-f", "/dev/null"]
-

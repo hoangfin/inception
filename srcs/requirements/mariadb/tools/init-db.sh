@@ -28,4 +28,3 @@ FLUSH PRIVILEGES;
 EOF
 
 echo "Starting MariaDB..."
-mysqld_safe

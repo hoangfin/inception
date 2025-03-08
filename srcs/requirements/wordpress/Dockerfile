@@ -35,13 +35,16 @@ RUN curl -o wordpress.tar.gz -fSL https://wordpress.org/latest.tar.gz \
     && tar -xzf wordpress.tar.gz \
     && rm wordpress.tar.gz
 
+#Set permissions
+RUN chown -R www-data:www-data /var/www/wordpress
+
+# Copy the custom wp-config.php for WordPress
+COPY conf/wp-config.php /var/www/wordpress/wp-config.php
+
 # Configure PHP-FPM
 RUN sed -i 's|;listen.owner = nobody|listen.owner = www-data|' /etc/php83/php-fpm.d/www.conf \
     && sed -i 's|;listen.group = nobody|listen.group = www-data|' /etc/php83/php-fpm.d/www.conf \
     && sed -i 's|listen = 127.0.0.1:9000|listen = 0.0.0.0:9000|' /etc/php83/php-fpm.d/www.conf
-
-#Set permissions
-RUN chown -R www-data:www-data /var/www/wordpress
 
 # Expose PHP-FPM port
 EXPOSE 9000
