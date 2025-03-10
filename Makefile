@@ -10,6 +10,8 @@ DATA_DIR_WP := $(DATA_DIR)/wp
 
 all: $(NAME)
 
+up: $(NAME)
+
 $(NAME): $(DATA_DIR_MARIADB) $(DATA_DIR_WP)
 	docker compose -p $(NAME) -f $(DOCKER_COMPOSE_YML) up --build
 
@@ -23,10 +25,13 @@ down:
 	docker compose -p $(NAME) -f $(DOCKER_COMPOSE_YML) down
 
 clean:
-	docker volume rm $(NAME)_$(DOCKER_VOL_MARIADB)
-	docker volume rm $(NAME)_$(DOCKER_VOL_WP)
-	rm -rf $(DATA_DIR)
+	@docker volume rm $(NAME)_$(DOCKER_VOL_MARIADB)
+	@docker volume rm $(NAME)_$(DOCKER_VOL_WP)
+	@rm -rf $(DATA_DIR)
 
 fclean: clean
+	@docker rmi mariadb:1.0
+	@docker rmi nginx:1.0
+	@docker rmi wordpress:1.0
 
 re:
