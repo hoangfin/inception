@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -ex
+set -e
 
 mysqld --user=mysql --bootstrap <<EOF
 	USE mysql;
@@ -18,4 +18,4 @@ mysqld --user=mysql --bootstrap <<EOF
 EOF
 
 echo "Starting MariaDB..."
-mysqld_safe --user=mysql
+exec mysqld_safe --user=mysql
