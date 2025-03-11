@@ -32,13 +32,13 @@ The infrastructure is defined using Docker Compose, making it easy to reproduce 
 ## Project Structure
 ```
 inception/
-|-- srcs/                    # Application source code (if applicable)
+|-- srcs/
 |   |-- requirements/
 |   |   |-- mariadb/
 |   |   |-- nginx/
 |   |   |-- wordpress/
-|   |-- .env                 # .env file exists here for educational purpose only
+|   |-- .env (educational purpose only)
 |   |-- docker-compose.yml
 |-- Makefile
-|-- README.md                # This file
+|-- README.md
 ```
