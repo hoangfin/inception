@@ -8,6 +8,8 @@ services:
             - .env
         volumes:
             - mariadb_vol:/var/lib/mysql
+        expose:
+            - "3306"
         networks:
             - hiver
     nginx:
@@ -17,6 +19,8 @@ services:
         restart: always
         depends_on:
             - wordpress
+        volumes:
+            - wp_vol:/var/www/wordpress
         ports:
             - "8443:443"
         networks:
@@ -26,12 +30,14 @@ services:
         image: wordpress:1.0
         container_name: wordpress
         restart: always
-        env_file:
-            - .env
         depends_on:
             - mariadb
+        env_file:
+            - .env
         volumes:
             - wp_vol:/var/www/wordpress
+        expose:
+            - "9000"
         networks:
             - hiver
 

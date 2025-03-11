@@ -2,8 +2,7 @@
 
 set -ex
 
-if ! mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "USE ${MYSQL_DATABASE}"; then
-	mysqld --user=mysql --bootstrap <<EOF
+mysqld --user=mysql --bootstrap <<EOF
 	USE mysql;
 	FLUSH PRIVILEGES;
 
@@ -17,7 +16,6 @@ if ! mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "USE ${MYSQL_DATABASE}"; then
 	GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
 	FLUSH PRIVILEGES;
 EOF
-fi
 
 echo "Starting MariaDB..."
-mysqld_safe
+mysqld_safe --user=mysql
