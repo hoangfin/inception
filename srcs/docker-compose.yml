@@ -19,6 +19,8 @@ services:
         restart: always
         depends_on:
             - wordpress
+        env_file:
+            - .env
         volumes:
             - wp_vol:/var/www/wordpress
         ports:

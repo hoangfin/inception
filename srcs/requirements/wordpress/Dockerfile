@@ -29,7 +29,6 @@ RUN curl -o wordpress.tar.gz -fSL https://wordpress.org/latest.tar.gz \
 	&& chown -R nginx:nginx /var/www/wordpress \
 	&& chmod -R 755 /var/www/wordpress
 
-# Copy the custom wp-config.php for WordPress
 COPY conf/www.conf /etc/php83/php-fpm.d/www.conf
 
 COPY tools/entrypoint.sh /usr/local/bin/entrypoint.sh
