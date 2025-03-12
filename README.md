@@ -35,8 +35,25 @@ inception/
 |-- srcs/
 |   |-- requirements/
 |   |   |-- mariadb/
+|   |   |   |-- conf/
+|   |   |   |   |-- mariadb-server.cnf
+|   |   |   |-- tools/
+|   |   |   |   |-- entrypoint.sh
+|   |   |   |-- .dockerignore
+|   |   |   |-- Dockerfile
 |   |   |-- nginx/
+|   |   |   |-- conf/
+|   |   |   |   |-- default.conf
+|   |   |   |-- tools/
+|   |   |   |-- .dockerignore
+|   |   |   |-- Dockerfile
 |   |   |-- wordpress/
+|   |   |   |-- conf/
+|   |   |   |   |-- www.conf
+|   |   |   |-- tools/
+|   |   |   |   |-- entrypoint.sh
+|   |   |   |-- .dockerignore
+|   |   |   |-- Dockerfile
 |   |-- .env (educational purpose only)
 |   |-- docker-compose.yml
 |-- Makefile
