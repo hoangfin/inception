@@ -18,4 +18,4 @@ RUN chmod +x /usr/bin/local/entrypoint.sh
 
 EXPOSE 443
 
-CMD ["/usr/bin/local/entrypoint.sh"]
+ENTRYPOINT [ "/usr/bin/local/entrypoint.sh" ]
